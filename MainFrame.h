@@ -22,12 +22,15 @@ class MainFrame : public MainFrame1
 		void mleczko( wxUpdateUIEvent& event );
 		void save_picture( wxCommandEvent& event );
 		void give_monkey_banana( wxCommandEvent& event );
+		void scrollbar_changed( wxScrollEvent& event );
 	public:
 		/** Constructor */
 		MainFrame( wxWindow* parent );
 	//// end generated class members
 		void Form_Paint(wxPaintEvent &e);
 		//BasicDrawPane* drawpane;
+
+
 
 
 

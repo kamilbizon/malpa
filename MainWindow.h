@@ -51,6 +51,7 @@ class MainFrame1 : public wxFrame
 		virtual void mleczko( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void save_picture( wxCommandEvent& event ) { event.Skip(); }
 		virtual void give_monkey_banana( wxCommandEvent& event ) { event.Skip(); }
+		virtual void scrollbar_changed( wxScrollEvent& event ) { event.Skip(); }
 		
 	
 	public:

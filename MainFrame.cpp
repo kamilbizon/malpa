@@ -10,13 +10,6 @@ MainFrame1( parent )
 	Bind(wxEVT_PAINT, &MainFrame::OnPaint, this);
 }
 
-//wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
-//    EVT_MENU(wxID_EXIT, MyFrame::OnExit)
-//    EVT_MENU(DO_TEST, MyFrame::DoTest)
-//    EVT_SIZE(MyFrame::OnSize)
-//    EVT_BUTTON(BUTTON1, MyFrame::OnButton1)
-//wxEND_EVENT_TABLE()
-
 void MainFrame::kappa( wxPaintEvent& event )
 {
 	//w_dupe(event);
@@ -40,7 +33,7 @@ MyDC->DrawLine(wxPoint(a / 2, b / 2 + 25), wxPoint(a / 2 + 25, b / 2 + 45));
 MyDC->DrawLine(wxPoint(a / 2, b / 2 + 90), wxPoint(a / 2 + 25, b / 2 + 120));
 MyDC->DrawLine(wxPoint(a / 2, b / 2 + 90), wxPoint(a / 2 - 25, b / 2 + 120));
 wxString const &text = m_textCtrl_show->GetValue();
-//MyDC->DrawText("KAPPA:", a/2 - 25, b/2 + 100);
+MyDC->DrawText(text, a/2 - 85, b/2 + 120);
 
 delete MyDC;
 }
@@ -61,6 +54,14 @@ if(m_scrollBar_move_hand->IsEnabled() == false)
 m_scrollBar_move_hand->Enable(true);
 else
 m_scrollBar_move_hand->Enable(false);
+}
+
+void MainFrame::scrollbar_changed( wxScrollEvent& event )
+{
+	int scrollrange = m_scrollBar_move_hand->GetRange();
+	int srcrollposition = m_scrollBar_move_hand->GetThumbPosition();
+	int gaugerange = m_gauge_move_hand->GetRange();
+	m_gauge_move_hand->SetValue((srcrollposition/scrollrange)*gaugerange);
 }
 
 

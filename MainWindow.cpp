@@ -20,7 +20,7 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	bSizerLeft = new wxBoxSizer( wxVERTICAL );
 	
 	m_panel_monkey = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	m_panel_monkey->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOW ) );
+	m_panel_monkey->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BTNTEXT ) );
 	m_panel_monkey->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BTNFACE ) );
 	
 	bSizerLeft->Add( m_panel_monkey, 1, wxEXPAND|wxALL, 5 );
@@ -73,6 +73,15 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_panel_monkey->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame1::mleczko ), NULL, this );
 	m_button_save_to_file->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::save_picture ), NULL, this );
 	m_checkBox_banana->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MainFrame1::give_monkey_banana ), NULL, this );
+	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
 }
 
 MainFrame1::~MainFrame1()
@@ -83,5 +92,14 @@ MainFrame1::~MainFrame1()
 	m_panel_monkey->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame1::mleczko ), NULL, this );
 	m_button_save_to_file->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::save_picture ), NULL, this );
 	m_checkBox_banana->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MainFrame1::give_monkey_banana ), NULL, this );
+	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
 	
 }
