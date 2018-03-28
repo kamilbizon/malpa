@@ -4,27 +4,36 @@ MainFrame::MainFrame( wxWindow* parent )
 :
 MainFrame1( parent )
 {
-	//drawpane = new BasicDrawPane(this);
-	//wxBoxSizer *Sizer = new wxBoxSizer(wxHORIZONTAL);
-	//Sizer->Add(drawpane, 1, wxEXPAND | wxALL, 5);
-	Bind(wxEVT_PAINT, &MainFrame::OnPaint, this);
+	m_scrollBar_move_hand->SetRange(100);
+	m_scrollBar_move_hand->SetThumbSize(1);
+	wxInitAllImageHandlers();
 }
 
-void MainFrame::kappa( wxPaintEvent& event )
+void MainFrame::update( wxUpdateUIEvent& event )
 {
-	//w_dupe(event);
+	Bind(wxEVT_PAINT, &MainFrame::draw, this);
+	m_textCtrl_show->Bind(wxEVT_COMMAND_TEXT_UPDATED, &MainFrame::drawt, this);
 }
 
-void MainFrame::w_dupe( wxPaintEvent& event )
+void MainFrame::draw(wxPaintEvent& event) {
+	draw();
+}
+
+void MainFrame::drawt(wxCommandEvent& event) {
+	draw();
+}
+
+void MainFrame::draw()
 {
-wxClientDC *MyDC;
-MyDC = new wxClientDC(m_panel_monkey);
+wxClientDC *MyDC1;
+MyDC1 = new wxClientDC(m_panel_monkey);
+wxBufferedDC* MyDC = new wxBufferedDC(MyDC1);
 
 wxSize size = m_panel_monkey->GetSize();
 int b = size.GetHeight();
 int a = size.GetWidth();
-MyDC->DrawRectangle(-1,-1,a+2, b+2);
-MyDC->DrawCircle(a/2 , b/2, 20);
+MyDC->DrawRectangle(-1, -1, a + 2, b + 2);
+MyDC->DrawCircle(a / 2, b / 2, 20);
 MyDC->DrawEllipse(a / 2 - 12, b / 2 - 7, 10, 6);
 MyDC->DrawEllipse(a / 2 + 4, b / 2 - 10, 6, 10);
 MyDC->DrawSpline(a / 2 - 10, b / 2 + 10, a / 2, b / 2 + 5, a / 2 + 10, b / 2 + 10);
@@ -33,22 +42,28 @@ MyDC->DrawLine(wxPoint(a / 2, b / 2 + 25), wxPoint(a / 2 + 25, b / 2 + 45));
 MyDC->DrawLine(wxPoint(a / 2, b / 2 + 90), wxPoint(a / 2 + 25, b / 2 + 120));
 MyDC->DrawLine(wxPoint(a / 2, b / 2 + 90), wxPoint(a / 2 - 25, b / 2 + 120));
 wxString const &text = m_textCtrl_show->GetValue();
-MyDC->DrawText(text, a/2 - 85, b/2 + 120);
+MyDC->DrawText(text, a / 2 - 85, b / 2 + 120);
 MyDC->SetFont(wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, "Segoe Script"));
 MyDC->DrawRotatedText(text, a / 2 + 85, b / 2 + 120, 90);
 
-
-delete MyDC;
+if (save)
+{
+wxBitmap savebitmap(a, b);
+wxMemoryDC memDC;
+memDC.SelectObject(savebitmap);
+memDC.Blit(0, 0, a, b, MyDC, 0, 0);
+savebitmap.SaveFile("malpa.bmp", wxBITMAP_TYPE_BMP);
 }
 
-void MainFrame::mleczko( wxUpdateUIEvent& event )
-{
-	Bind(wxEVT_PAINT, &MainFrame::w_dupe, this);
+delete MyDC;
+delete MyDC1;
 }
 
 void MainFrame::save_picture( wxCommandEvent& event )
 {
-// TODO: Implement save_picture
+save = true;
+draw();
+save = false;
 }
 
 void MainFrame::give_monkey_banana( wxCommandEvent& event )
@@ -66,8 +81,7 @@ int gaugerange = m_gauge_move_hand->GetRange();
 m_gauge_move_hand->SetValue(srcrollposition);
 }
 
-
-void MainFrame::Form_Paint(wxPaintEvent &e)
+void MainFrame::text_updated( wxCommandEvent& event )
 {
-
+	Bind(wxEVT_UPDATE_UI, &MainFrame::update, this);
 }

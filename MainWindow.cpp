@@ -38,6 +38,8 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	bSizerRight->Add( m_checkBox_banana, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	m_scrollBar_move_hand = new wxScrollBar( this, wxID_ANY, wxDefaultPosition, wxSize( 185,-1 ), wxSB_HORIZONTAL );
+	m_scrollBar_move_hand->Enable( false );
+	
 	bSizerRight->Add( m_scrollBar_move_hand, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	m_gauge_move_hand = new wxGauge( this, wxID_ANY, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL );
@@ -50,7 +52,7 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_textCtrl_show = new wxTextCtrl( this, wxID_ANY, wxT("tekst"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizerRight->Add( m_textCtrl_show, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	wxString m_choice_pictureChoices[] = { wxT("gwiazdka"), wxT("księżyc"), wxT("słonko") };
+	wxString m_choice_pictureChoices[] = { wxT("gwiazdka"), wxT("ksiezyc"), wxT("slonko") };
 	int m_choice_pictureNChoices = sizeof( m_choice_pictureChoices ) / sizeof( wxString );
 	m_choice_picture = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choice_pictureNChoices, m_choice_pictureChoices, 0 );
 	m_choice_picture->SetSelection( 0 );
@@ -66,9 +68,8 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	this->Centre( wxBOTH );
 	
 	// Connect Events
-	this->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame1::kappa ) );
-	m_panel_monkey->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame1::w_dupe ), NULL, this );
-	m_panel_monkey->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame1::mleczko ), NULL, this );
+	this->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame1::update ) );
+	m_panel_monkey->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame1::draw ), NULL, this );
 	m_button_save_to_file->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::save_picture ), NULL, this );
 	m_checkBox_banana->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MainFrame1::give_monkey_banana ), NULL, this );
 	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
@@ -80,14 +81,14 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
 	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
 	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_textCtrl_show->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( MainFrame1::text_updated ), NULL, this );
 }
 
 MainFrame1::~MainFrame1()
 {
 	// Disconnect Events
-	this->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame1::kappa ) );
-	m_panel_monkey->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame1::w_dupe ), NULL, this );
-	m_panel_monkey->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame1::mleczko ), NULL, this );
+	this->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame1::update ) );
+	m_panel_monkey->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame1::draw ), NULL, this );
 	m_button_save_to_file->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::save_picture ), NULL, this );
 	m_checkBox_banana->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( MainFrame1::give_monkey_banana ), NULL, this );
 	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
@@ -99,5 +100,6 @@ MainFrame1::~MainFrame1()
 	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
 	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
 	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
+	m_textCtrl_show->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( MainFrame1::text_updated ), NULL, this );
 	
 }

@@ -46,17 +46,17 @@ class MainFrame1 : public wxFrame
 		wxChoice* m_choice_picture;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void kappa( wxPaintEvent& event ) { event.Skip(); }
-		virtual void w_dupe( wxPaintEvent& event ) { event.Skip(); }
-		virtual void mleczko( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void update( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void draw( wxPaintEvent& event ) { event.Skip(); }
 		virtual void save_picture( wxCommandEvent& event ) { event.Skip(); }
 		virtual void give_monkey_banana( wxCommandEvent& event ) { event.Skip(); }
 		virtual void scrollbar_changed( wxScrollEvent& event ) { event.Skip(); }
+		virtual void text_updated( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		MainFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("GFK Lab 03 małpa"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 590,390 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MainFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("GFK Lab 03 malpa"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 590,390 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~MainFrame1();
 	
