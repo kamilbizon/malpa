@@ -52,11 +52,12 @@ class MainFrame1 : public wxFrame
 		virtual void give_monkey_banana( wxCommandEvent& event ) { event.Skip(); }
 		virtual void scrollbar_changed( wxScrollEvent& event ) { event.Skip(); }
 		virtual void text_updated( wxCommandEvent& event ) { event.Skip(); }
+		virtual void change_picture( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		MainFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("GFK Lab 03 malpa"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 590,390 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MainFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("GFK Lab 03"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 590,390 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~MainFrame1();
 	

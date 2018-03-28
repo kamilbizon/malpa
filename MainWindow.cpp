@@ -82,6 +82,7 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
 	m_scrollBar_move_hand->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
 	m_textCtrl_show->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( MainFrame1::text_updated ), NULL, this );
+	m_choice_picture->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( MainFrame1::change_picture ), NULL, this );
 }
 
 MainFrame1::~MainFrame1()
@@ -101,5 +102,6 @@ MainFrame1::~MainFrame1()
 	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
 	m_scrollBar_move_hand->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame1::scrollbar_changed ), NULL, this );
 	m_textCtrl_show->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( MainFrame1::text_updated ), NULL, this );
+	m_choice_picture->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( MainFrame1::change_picture ), NULL, this );
 	
 }

@@ -20,19 +20,19 @@ class MainFrame : public MainFrame1
 		// Handlers for MainFrame1 events.
 		void update( wxUpdateUIEvent& event );
 		void draw( wxPaintEvent& event );
-		void drawt(wxCommandEvent& event);
-		void draw();
 		void save_picture( wxCommandEvent& event );
 		void give_monkey_banana( wxCommandEvent& event );
 		void scrollbar_changed( wxScrollEvent& event );
 		void text_updated( wxCommandEvent& event );
+		void change_picture( wxCommandEvent& event );
 	public:
 		/** Constructor */
 		MainFrame( wxWindow* parent );
 	//// end generated class members
 	protected:
 		bool save = false;
-
+		void drawt(wxCommandEvent& event);
+		void draw();
 
 
 

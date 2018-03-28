@@ -68,6 +68,16 @@ if (m_choice_picture->GetSelection() == 0)
 	star[9] = wxPoint(120, 125);
 	MyDC->DrawPolygon(10, star, 30, 30);
 }
+else if (m_choice_picture->GetSelection() == 1)
+{
+	MyDC->SetBrush(wxColor(115, 115, 115));
+	MyDC->DrawCircle(120, 120, 20);
+}
+else if (m_choice_picture->GetSelection() == 2)
+{
+	MyDC->SetBrush(wxColor(255, 200, 115));
+	MyDC->DrawCircle(100, 100, 30);
+}
 
 wxString const &text = m_textCtrl_show->GetValue();
 MyDC->DrawText(text, a / 2 - 85, b / 2 + 120);
@@ -126,4 +136,9 @@ draw();
 void MainFrame::text_updated( wxCommandEvent& event )
 {
 	Bind(wxEVT_UPDATE_UI, &MainFrame::update, this);
+}
+
+void MainFrame::change_picture(wxCommandEvent& event)
+{
+	draw();
 }
