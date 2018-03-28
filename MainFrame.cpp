@@ -34,6 +34,9 @@ MyDC->DrawLine(wxPoint(a / 2, b / 2 + 90), wxPoint(a / 2 + 25, b / 2 + 120));
 MyDC->DrawLine(wxPoint(a / 2, b / 2 + 90), wxPoint(a / 2 - 25, b / 2 + 120));
 wxString const &text = m_textCtrl_show->GetValue();
 MyDC->DrawText(text, a/2 - 85, b/2 + 120);
+MyDC->SetFont(wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, "Segoe Script"));
+MyDC->DrawRotatedText(text, a / 2 + 85, b / 2 + 120, 90);
+
 
 delete MyDC;
 }
@@ -58,10 +61,9 @@ m_scrollBar_move_hand->Enable(false);
 
 void MainFrame::scrollbar_changed( wxScrollEvent& event )
 {
-	int scrollrange = m_scrollBar_move_hand->GetRange();
-	int srcrollposition = m_scrollBar_move_hand->GetThumbPosition();
-	int gaugerange = m_gauge_move_hand->GetRange();
-	m_gauge_move_hand->SetValue((srcrollposition/scrollrange)*gaugerange);
+int srcrollposition = m_scrollBar_move_hand->GetThumbPosition();
+int gaugerange = m_gauge_move_hand->GetRange();
+m_gauge_move_hand->SetValue(srcrollposition);
 }
 
 

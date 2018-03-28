@@ -38,8 +38,6 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	bSizerRight->Add( m_checkBox_banana, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	m_scrollBar_move_hand = new wxScrollBar( this, wxID_ANY, wxDefaultPosition, wxSize( 185,-1 ), wxSB_HORIZONTAL );
-	m_scrollBar_move_hand->Enable( false );
-	
 	bSizerRight->Add( m_scrollBar_move_hand, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	m_gauge_move_hand = new wxGauge( this, wxID_ANY, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL );
